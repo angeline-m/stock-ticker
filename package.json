@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Package file for Assignment 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "concurrently \"mkdir -p src src/js src/css src/assets\" \"touch src/index.html src/js/index.js src/scss/styles.css\"",
+    "dev": "parcel src/index.html ",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angeline-m/dmit-2008-assign-1"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Angeline Manabat",
+  "license": "MIT",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
