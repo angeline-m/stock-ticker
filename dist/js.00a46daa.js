@@ -909,7 +909,64 @@ function _asyncToGenerator(fn) {
 }
 
 module.exports = _asyncToGenerator;
-},{}],"js/models/alphavantage.js":[function(require,module,exports) {
+},{}],"js/controllers/search-controller.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function SearchController(model, searchView) {
+  var _this = this;
+
+  this.model = model;
+  this.searchView = searchView;
+  var searchForm = document.querySelector('#searchForm');
+  searchForm.addEventListener('submit', this.onHandleSubmit);
+
+  this.onHandleSubmit = /*#__PURE__*/function () {
+    var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {
+      var symbol, searchResponse;
+      return _regenerator.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              symbol = _this.searchView.view[0].value;
+              _context.next = 4;
+              return _this.model.search(symbol);
+
+            case 4:
+              searchResponse = _context.sent;
+
+              _this.view.renderView(searchResponse);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return this;
+}
+
+var _default = SearchController;
+exports.default = _default;
+},{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"../node_modules/@babel/runtime/helpers/asyncToGenerator.js"}],"js/models/alphavantage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2702,19 +2759,37 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _ejs = _interopRequireDefault(require("../../../node_modules/ejs"));
+var _ejs = _interopRequireDefault(require("ejs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function SearchView(viewId) {
-  this.view = document.querySelector(viewId);
+var foundResultView = "<aside class=\"symbolInfo\">\n                <h2><%=symbol['01. symbol']%> Information</h2>\n                </aside>";
+var noResultView = "<aside class=\"noResults\">\n<h2>No results found</h2>\n</aside>";
+
+function SearchView() {
+  this.container = document.querySelector('#results');
+
+  this.renderView = function (symbol) {
+    this.removeChildElements();
+
+    if (symbol.results.length === 0) {
+      var elem = _ejs.default.render(noResultView);
+
+      this.container.insertAdjacentHTML("afterbegin", elem);
+    }
+
+    if (symbol.results.length !== 0) {}
+  };
+
   return this;
 }
 
 var _default = SearchView;
 exports.default = _default;
-},{"../../../node_modules/ejs":"../node_modules/ejs/lib/ejs.js"}],"js/index.js":[function(require,module,exports) {
+},{"ejs":"../node_modules/ejs/lib/ejs.js"}],"js/index.js":[function(require,module,exports) {
 "use strict";
+
+var _searchController = _interopRequireDefault(require("./controllers/search-controller.js"));
 
 var _alphavantage = _interopRequireDefault(require("./models/alphavantage.js"));
 
@@ -2724,10 +2799,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //instantiate model and view and feed it into the controller
 var model = new _alphavantage.default();
-var searchView = new _searchView.default('#searchForm');
+var searchView = new _searchView.default();
+var controller = new _searchController.default(model, searchView);
 console.log(model);
 console.log(searchView);
-},{"./models/alphavantage.js":"js/models/alphavantage.js","./views/search-view.js":"js/views/search-view.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./controllers/search-controller.js":"js/controllers/search-controller.js","./models/alphavantage.js":"js/models/alphavantage.js","./views/search-view.js":"js/views/search-view.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2755,7 +2831,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60689" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61471" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

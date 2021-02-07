@@ -1,11 +1,21 @@
 function SearchController(model, searchView){
     this.model = model;
     this.searchView = searchView;
-    this.searchView.setController(this);
 
-    this.configListeners = () => {
-        this.searchView.view.addEventListener("submit", this.onHandleSubmit);
+    const searchForm = document.querySelector('#searchForm');
+
+    searchForm.addEventListener('submit', this.onHandleSubmit);
+
+    this.onHandleSubmit = async (e) => {
+        e.preventDefault();
+        const symbol = this.searchView.view[0].value;
+        
+        const searchResponse = await this.model.search(symbol);
+        
+        this.view.renderView(searchResponse);
     }
+
+    return this;
 
 }
 

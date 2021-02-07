@@ -4,12 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
     <title>Stock Ticker</title>
 </head>
 <body>
-    <form id="searchForm">
-        
-    </form>
+    <header>
+        <h1>Stock Ticker App</h1>
+    </header>
+    <main>
+        <form id="searchForm" class="searchForm">
+            <label for="symbolSearch">Enter your search query</label>
+            <div>
+                <input type="text" id="symbolSearch" name="symbolSearch">
+                <button class="submit">Search</button>
+            </div>
+        </form>
+        <aside id="results" class="results">
+            
+        </aside>
+    </main>
+    
     <script src="js/index.js" type="module"></script>
 </body>
 </html>
