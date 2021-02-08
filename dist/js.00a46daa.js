@@ -926,10 +926,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function SearchController(model, searchView) {
   var _this = this;
 
+  //assign the passed in arguments
   this.model = model;
-  this.searchView = searchView;
-  var searchForm = document.querySelector('#searchForm');
-  searchForm.addEventListener('submit', this.onHandleSubmit);
+  this.searchView = searchView; //set a const to the form that the user interacts with
+
+  var searchForm = document.forms['searchForm']; //add event listener for the form
+
+  searchForm.addEventListener('submit', this.onHandleSubmit); //function to handle when form is submitted
 
   this.onHandleSubmit = /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {
@@ -938,14 +941,17 @@ function SearchController(model, searchView) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              e.preventDefault();
-              symbol = _this.searchView.view[0].value;
+              e.preventDefault(); //set a const to the input value
+
+              symbol = searchForm.symbolSearch.value; //assign the search results
+
               _context.next = 4;
               return _this.model.search(symbol);
 
             case 4:
               searchResponse = _context.sent;
 
+              //render the view for the results
               _this.view.renderView(searchResponse);
 
             case 6:
@@ -982,14 +988,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // url = https://www.alphavantage.co/query?function=GLOBAL_QUOTE&apikey=XYAY0DIIOBBWZVFL&symbol=
 function AlphaVantageModel() {
-  this.apiBaseUrl = 'https://www.alphavantage.co/query';
-  this.function = 'GLOBAL_QUOTE';
+  //assign each separate part of the URL to a property
+  this.apiBaseUrl = 'https://www.alphavantage.co/query'; //function value
+
+  this.function = 'GLOBAL_QUOTE'; //api key
+
   this.key = 'XYAY0DIIOBBWZVFL';
   /* this.query = async function (url) {
      const req = await fetch(url);
      const res = await req.json();
      return res;
   } */
+  //create the proper query URL
 
   this.search = /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(symbol) {
@@ -998,8 +1008,10 @@ function AlphaVantageModel() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              //append the ? to the URL
               url = new URL(this.apiBaseURL + '?');
-              params = new URLSearchParams();
+              params = new URLSearchParams(); //set the values for the function, key, and symbol in the query
+
               params.set('function', this.function);
               params.set('key', this.key);
               params.set('symbol', symbol);
@@ -2763,22 +2775,40 @@ var _ejs = _interopRequireDefault(require("ejs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var foundResultView = "<aside class=\"symbolInfo\">\n                <h2><%=symbol['01. symbol']%> Information</h2>\n                </aside>";
+//view for when there are valid results
+var foundResultView = "<aside class=\"symbolInfo\">\n                <h2><%=symbol['01. symbol']%> Information</h2>\n                </aside>"; //view for when there are no results
+
 var noResultView = "<aside class=\"noResults\">\n<h2>No results found</h2>\n</aside>";
 
 function SearchView() {
+  //assign the results aside
   this.container = document.querySelector('#results');
 
   this.renderView = function (symbol) {
-    this.removeChildElements();
+    //clear the results div before we render out the result
+    this.removeChildElements(); //if no results, render the noResultView
 
     if (symbol.results.length === 0) {
       var elem = _ejs.default.render(noResultView);
 
       this.container.insertAdjacentHTML("afterbegin", elem);
-    }
+    } //if there are results, render the foundResultView
 
-    if (symbol.results.length !== 0) {}
+
+    if (symbol.results.length !== 0) {
+      var _elem = _ejs.default.render(foundResultView);
+
+      this.container.insertAdjacentHTML("afterbegin", _elem);
+    } //clear the results div
+
+
+    this.removeChildElements = function () {
+      var _this = this;
+
+      this.container.querySelectorAll('aside').forEach(function (symbol) {
+        _this.container.removeChild(symbol);
+      });
+    };
   };
 
   return this;
@@ -2798,11 +2828,14 @@ var _searchView = _interopRequireDefault(require("./views/search-view.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //instantiate model and view and feed it into the controller
+//import default functions from the controller, view, and model folders
+//create new "classes" from these default functions
 var model = new _alphavantage.default();
 var searchView = new _searchView.default();
 var controller = new _searchController.default(model, searchView);
 console.log(model);
 console.log(searchView);
+console.log(controller);
 },{"./controllers/search-controller.js":"js/controllers/search-controller.js","./models/alphavantage.js":"js/models/alphavantage.js","./views/search-view.js":"js/views/search-view.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -2831,7 +2864,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61471" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58055" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
