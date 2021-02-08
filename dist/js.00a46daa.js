@@ -117,7 +117,46 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
+})({"js/controllers/search-controller.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function SearchController(model, searchView) {
+  var _this = this;
+
+  //assign the passed in arguments
+  this.model = model;
+  this.searchView = searchView;
+
+  this.configUI = function () {
+    //set a const to the form that the user interacts with
+    var searchForm = document.forms['searchForm']; //add event listener for the form
+
+    searchForm.addEventListener('submit', this.onHandleSubmit);
+  }; //function to handle when form is submitted
+
+
+  this.onHandleSubmit = function (e) {
+    e.preventDefault(); //set a const to the input value
+
+    var symbol = searchForm.symbolSearch.value; //assign the search results
+
+    var searchResponse = _this.model.search(symbol); //render the view for the results
+
+
+    _this.searchView.renderView(searchResponse);
+  };
+
+  return this;
+}
+
+var _default = SearchController;
+exports.default = _default;
+},{}],"../node_modules/regenerator-runtime/runtime.js":[function(require,module,exports) {
 var define;
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -909,74 +948,7 @@ function _asyncToGenerator(fn) {
 }
 
 module.exports = _asyncToGenerator;
-},{}],"js/controllers/search-controller.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function SearchController(model, searchView) {
-  var _this = this;
-
-  //assign the passed in arguments
-  this.model = model;
-  this.searchView = searchView;
-
-  this.configUI = function () {
-    //set a const to the form that the user interacts with
-    var searchForm = document.forms['searchForm']; //add event listener for the form
-
-    searchForm.addEventListener('submit', this.onHandleSubmit);
-  }; //function to handle when form is submitted
-
-
-  this.onHandleSubmit = /*#__PURE__*/function () {
-    var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {
-      var symbol, searchResponse;
-      return _regenerator.default.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              e.preventDefault(); //set a const to the input value
-
-              symbol = searchForm.symbolSearch.value; //assign the search results
-
-              _context.next = 4;
-              return _this.model.search(symbol);
-
-            case 4:
-              searchResponse = _context.sent;
-
-              //render the view for the results
-              _this.searchView.renderView(searchResponse);
-
-            case 6:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  return this;
-}
-
-var _default = SearchController;
-exports.default = _default;
-},{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"../node_modules/@babel/runtime/helpers/asyncToGenerator.js"}],"js/models/alphavantage.js":[function(require,module,exports) {
+},{}],"js/models/alphavantage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1017,9 +989,10 @@ function AlphaVantageModel() {
 
               params = new URLSearchParams();
               params.set('function', this.function);
-              params.set('key', this.key);
+              params.set('apikey', this.key);
               params.set('symbol', symbol);
-              url = url + params;
+              url = url + params; //retrieve the info
+
               _context.next = 8;
               return fetch(url);
 
@@ -2780,7 +2753,7 @@ var _ejs = _interopRequireDefault(require("ejs"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //view for when there are valid results
-var foundResultView = "<aside class=\"symbolInfo\">\n                <h2><%=symbol['01. symbol']%> Information</h2>\n                </aside>"; //view for when there are no results
+var foundResultView = "<aside class=\"symbolInfo\">\n                <h2><%=data['01. symbol']%> Information</h2>\n                </aside>"; //view for when there are no results
 
 var noResultView = "<aside class=\"noResults\">\n<h2>No results found</h2>\n</aside>";
 
@@ -2788,31 +2761,33 @@ function SearchView() {
   //assign the results aside
   this.container = document.querySelector('#results');
 
-  this.renderView = function (symbol) {
+  this.renderView = function (searchResult) {
+    var _this = this;
+
     //clear the results div before we render out the result
-    this.removeChildElements(); //if no results, render the noResultView
+    this.removeChildElements();
+    var renderedElement = searchResult.then(function (data) {
+      console.log(data); //if no results, render the foundResultView, otherwise render the noResultView
 
-    if (symbol.results.length === 0) {
-      var elem = _ejs.default.render(noResultView);
+      if (data == undefined || data == null) {
+        var elem = _ejs.default.render(foundResultView);
 
-      this.container.insertAdjacentHTML("afterbegin", elem);
-    } //if there are results, render the foundResultView
+        _this.container.insertAdjacentHTML("afterbegin", elem);
+      } else {
+        var _elem = _ejs.default.render(noResultView);
+
+        _this.container.insertAdjacentHTML("afterbegin", _elem);
+      }
+    });
+  }; //clear the results div
 
 
-    if (symbol.results.length !== 0) {
-      var _elem = _ejs.default.render(foundResultView);
+  this.removeChildElements = function () {
+    var _this2 = this;
 
-      this.container.insertAdjacentHTML("afterbegin", _elem);
-    } //clear the results div
-
-
-    this.removeChildElements = function () {
-      var _this = this;
-
-      this.container.querySelectorAll('aside').forEach(function (symbol) {
-        _this.container.removeChild(symbol);
-      });
-    };
+    this.container.querySelectorAll('aside').forEach(function (searchResult) {
+      _this2.container.removeChild(searchResult);
+    });
   };
 
   return this;

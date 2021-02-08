@@ -25,13 +25,17 @@ function AlphaVantageModel(){
         //set the values for the function, key, and symbol in the query
         const params = new URLSearchParams();
         params.set('function', this.function);
-        params.set('key', this.key);
+        params.set('apikey', this.key);
         params.set('symbol', symbol)
         url = url+params;
         
+        //retrieve the info
         const req = await fetch(url);
         const res = await req.json();
+
+        //return the Global Quote object in the object
         return res["Global Quote"];
+
     }
 
     return this;

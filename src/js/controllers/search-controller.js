@@ -13,15 +13,15 @@ function SearchController(model, searchView){
     }
 
     //function to handle when form is submitted
-    this.onHandleSubmit = async (e) => {
+    this.onHandleSubmit = (e) => {
         e.preventDefault();
 
         //set a const to the input value
         const symbol = searchForm.symbolSearch.value;
         
         //assign the search results
-        const searchResponse = await this.model.search(symbol);
-        
+        const searchResponse = this.model.search(symbol);
+
         //render the view for the results
         this.searchView.renderView(searchResponse);
 
