@@ -956,7 +956,7 @@ function SearchController(model, searchView) {
               searchResponse = _context.sent;
 
               //render the view for the results
-              _this.view.renderView(searchResponse);
+              _this.searchView.renderView(searchResponse);
 
             case 6:
             case "end":
@@ -993,7 +993,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // url = https://www.alphavantage.co/query?function=GLOBAL_QUOTE&apikey=XYAY0DIIOBBWZVFL&symbol=
 function AlphaVantageModel() {
   //assign each separate part of the URL to a property
-  this.apiBaseUrl = 'https://www.alphavantage.co/query'; //function value
+  this.apiBaseURL = 'https://www.alphavantage.co/query'; //function value
 
   this.function = 'GLOBAL_QUOTE'; //api key
 
@@ -1013,9 +1013,9 @@ function AlphaVantageModel() {
           switch (_context.prev = _context.next) {
             case 0:
               //append the ? to the URL
-              url = new URL(this.apiBaseURL + '?');
-              params = new URLSearchParams(); //set the values for the function, key, and symbol in the query
+              url = new URL(this.apiBaseURL + '?'); //set the values for the function, key, and symbol in the query
 
+              params = new URLSearchParams();
               params.set('function', this.function);
               params.set('key', this.key);
               params.set('symbol', symbol);

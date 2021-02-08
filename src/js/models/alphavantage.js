@@ -3,7 +3,7 @@
 function AlphaVantageModel(){
 
     //assign each separate part of the URL to a property
-    this.apiBaseUrl = 'https://www.alphavantage.co/query';
+    this.apiBaseURL = 'https://www.alphavantage.co/query';
 
     //function value
     this.function = 'GLOBAL_QUOTE';
@@ -21,9 +21,9 @@ function AlphaVantageModel(){
     this.search = async function (symbol){
         //append the ? to the URL
         let url = new URL(this.apiBaseURL + '?');
-        const params = new URLSearchParams();
-        
+
         //set the values for the function, key, and symbol in the query
+        const params = new URLSearchParams();
         params.set('function', this.function);
         params.set('key', this.key);
         params.set('symbol', symbol)

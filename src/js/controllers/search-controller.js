@@ -23,7 +23,7 @@ function SearchController(model, searchView){
         const searchResponse = await this.model.search(symbol);
         
         //render the view for the results
-        this.view.renderView(searchResponse);
+        this.searchView.renderView(searchResponse);
 
     }
 
