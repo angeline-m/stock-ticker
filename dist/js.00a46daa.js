@@ -2752,10 +2752,10 @@ var _ejs = _interopRequireDefault(require("ejs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//view for when there are valid results
-var foundResultView = "<aside class=\"symbolInfo\">\n                <h2><%=data['01. symbol']%> Information</h2>\n                </aside>"; //view for when there are no results
+//view for when there are no results
+var noResultView = "<aside class=\"noResults\">\n                        <h2>No results found</h2>\n                        </aside>"; //view for when there are valid results
 
-var noResultView = "<aside class=\"noResults\">\n<h2>No results found</h2>\n</aside>";
+var foundResultView = "<aside class=\"symbolInfo\">\n                        <h2><%= data['01. symbol'] %> Information</h2>\n                        </aside>";
 
 function SearchView() {
   //assign the results aside
@@ -2769,12 +2769,12 @@ function SearchView() {
     var renderedElement = searchResult.then(function (data) {
       console.log(data); //if no results, render the foundResultView, otherwise render the noResultView
 
-      if (data == undefined || data == null) {
-        var elem = _ejs.default.render(foundResultView);
+      if (data['01. symbol'] == undefined || data['01. symbol'] == null) {
+        var elem = _ejs.default.render(noResultView, data);
 
         _this.container.insertAdjacentHTML("afterbegin", elem);
       } else {
-        var _elem = _ejs.default.render(noResultView);
+        var _elem = _ejs.default.render(foundResultView, data);
 
         _this.container.insertAdjacentHTML("afterbegin", _elem);
       }
@@ -2844,7 +2844,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58055" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64841" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

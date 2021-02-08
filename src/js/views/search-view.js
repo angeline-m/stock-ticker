@@ -1,14 +1,14 @@
 import ejs from 'ejs';
 
-//view for when there are valid results
-const foundResultView = `<aside class="symbolInfo">
-                <h2><%=data['01. symbol']%> Information</h2>
-                </aside>`;
-
 //view for when there are no results
 const noResultView = `<aside class="noResults">
-<h2>No results found</h2>
-</aside>`;
+                        <h2>No results found</h2>
+                        </aside>`;
+
+//view for when there are valid results
+const foundResultView = `<aside class="symbolInfo">
+                        <h2><%= data['01. symbol'] %> Information</h2>
+                        </aside>`;
 
 function SearchView() {
 
@@ -22,11 +22,11 @@ function SearchView() {
         const renderedElement = searchResult.then((data) => {
             console.log(data)
             //if no results, render the foundResultView, otherwise render the noResultView
-            if (data == undefined || data == null) {
-                const elem = ejs.render(foundResultView);
+            if (data['01. symbol'] == undefined || data['01. symbol']  == null) {
+                const elem = ejs.render(noResultView, data);
                 this.container.insertAdjacentHTML("afterbegin", elem);
             } else {
-                const elem = ejs.render(noResultView);
+                const elem = ejs.render(foundResultView, data);
                 this.container.insertAdjacentHTML("afterbegin", elem);
             }
 

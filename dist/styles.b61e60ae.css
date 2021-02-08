@@ -1,6 +1,16 @@
 body {
     text-align: center;
     font-family: 'Calibri', 'Arial', sans-serif;
+    background-color: #b4b4b4;
 }
+
+header {
+    background-color: #2f2f2f;
+    color: #fff;
+    font-size: 2rem;
+    padding: 20px 0;
+}
+
+
 
 /*# sourceMappingURL=/styles.b61e60ae.css.map */

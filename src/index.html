@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://web.simmons.edu/~grovesd/comm244/notes/week4/reset.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
     <title>Stock Ticker</title>
 </head>
@@ -12,15 +13,17 @@
         <h1>Stock Ticker App</h1>
     </header>
     <main>
-        <form id="searchForm" class="searchForm">
-            <label for="symbolSearch">Enter your search query</label>
-            <div>
-                <input type="text" id="symbolSearch" name="symbolSearch">
-                <button class="submit">Search</button>
+        <div class="container">
+            <form id="searchForm" class="searchForm">
+                <label for="symbolSearch">Enter your search query</label>
+                <div>
+                    <input type="text" id="symbolSearch" name="symbolSearch">
+                    <button class="submit">Search</button>
+                </div>
+            </form>
+            <div id="results" class="results">
+                
             </div>
-        </form>
-        <div id="results" class="results">
-            
         </div>
     </main>
     
