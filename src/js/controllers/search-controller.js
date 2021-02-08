@@ -17,7 +17,7 @@ function SearchController(model, searchView){
         e.preventDefault();
 
         //set a const to the input value
-        const symbol = searchForm.symbolSearch.value;
+        const symbol = searchForm.symbolSearch.value.trim();
         
         //assign the search results
         const searchResponse = this.model.search(symbol);

@@ -143,7 +143,7 @@ function SearchController(model, searchView) {
   this.onHandleSubmit = function (e) {
     e.preventDefault(); //set a const to the input value
 
-    var symbol = searchForm.symbolSearch.value; //assign the search results
+    var symbol = searchForm.symbolSearch.value.trim(); //assign the search results
 
     var searchResponse = _this.model.search(symbol); //render the view for the results
 
@@ -2840,7 +2840,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64841" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51157" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
