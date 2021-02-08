@@ -928,11 +928,15 @@ function SearchController(model, searchView) {
 
   //assign the passed in arguments
   this.model = model;
-  this.searchView = searchView; //set a const to the form that the user interacts with
+  this.searchView = searchView;
 
-  var searchForm = document.forms['searchForm']; //add event listener for the form
+  this.configUI = function () {
+    //set a const to the form that the user interacts with
+    var searchForm = document.forms['searchForm']; //add event listener for the form
 
-  searchForm.addEventListener('submit', this.onHandleSubmit); //function to handle when form is submitted
+    searchForm.addEventListener('submit', this.onHandleSubmit);
+  }; //function to handle when form is submitted
+
 
   this.onHandleSubmit = /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {
@@ -2833,6 +2837,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var model = new _alphavantage.default();
 var searchView = new _searchView.default();
 var controller = new _searchController.default(model, searchView);
+controller.configUI();
 console.log(model);
 console.log(searchView);
 console.log(controller);

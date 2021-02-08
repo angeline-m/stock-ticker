@@ -3,11 +3,14 @@ function SearchController(model, searchView){
     this.model = model;
     this.searchView = searchView;
 
-    //set a const to the form that the user interacts with
-    const searchForm = document.forms['searchForm'];
+    this.configUI = function() {
+        //set a const to the form that the user interacts with
+        const searchForm = document.forms['searchForm'];
 
-    //add event listener for the form
-    searchForm.addEventListener('submit', this.onHandleSubmit);
+        //add event listener for the form
+        searchForm.addEventListener('submit', this.onHandleSubmit);
+
+    }
 
     //function to handle when form is submitted
     this.onHandleSubmit = async (e) => {
