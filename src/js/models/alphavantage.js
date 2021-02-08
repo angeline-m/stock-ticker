@@ -3,6 +3,7 @@
 function AlphaVantageModel(){
 
     //assign each separate part of the URL to a property
+    
     this.apiBaseURL = 'https://www.alphavantage.co/query';
 
     //function value
@@ -10,12 +11,6 @@ function AlphaVantageModel(){
 
     //api key
     this.key = 'XYAY0DIIOBBWZVFL';
-
-     /* this.query = async function (url) {
-        const req = await fetch(url);
-        const res = await req.json();
-        return res;
-    } */
 
     //create the proper query URL
     this.search = async function (symbol){

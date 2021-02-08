@@ -969,13 +969,7 @@ function AlphaVantageModel() {
 
   this.function = 'GLOBAL_QUOTE'; //api key
 
-  this.key = 'XYAY0DIIOBBWZVFL';
-  /* this.query = async function (url) {
-     const req = await fetch(url);
-     const res = await req.json();
-     return res;
-  } */
-  //create the proper query URL
+  this.key = 'XYAY0DIIOBBWZVFL'; //create the proper query URL
 
   this.search = /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(symbol) {
@@ -2755,7 +2749,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //view for when there are no results
 var noResultView = "<aside class=\"noResults\">\n                        <h2>No results found</h2>\n                        </aside>"; //view for when there are valid results
 
-var foundResultView = "<aside class=\"symbolInfo\">\n                        <h2><%= data['01. symbol'] %> Information</h2>\n                        </aside>";
+var foundResultView = "<aside class=\"symbolInfo\">\n                        <h2><%=ticker['01. symbol']%> Information</h2>\n                        <div class=\"info lineOne\">\n                            <span class=\"symbol\"><%=ticker['01. symbol']%></span>\n                            <span class=\"price\"><%=ticker['05. price']%> USD</span>\n                        </div>\n                        <div class=\"info lineTwo\">\n                            <p>Closed <span class=\"date\"><%=ticker['07. latest trading day']%></span></p>\n                        </div>\n                        <div class=\"info lineThree\">\n                            <p>Previous close <span class=\"close\"><%=ticker['08. previous close']%></span>, change of <span class=\"change\"><%=ticker['09. change']%></span> <span class=\"change-per\">(<%=ticker['10. change percent']%>)</span></p>\n                        </div>\n                        </aside>";
 
 function SearchView() {
   //assign the results aside
@@ -2766,15 +2760,19 @@ function SearchView() {
 
     //clear the results div before we render out the result
     this.removeChildElements();
-    var renderedElement = searchResult.then(function (data) {
-      console.log(data); //if no results, render the foundResultView, otherwise render the noResultView
+    var renderedElement = searchResult.then(function (ticker) {
+      //if no results, render the foundResultView, otherwise render the noResultView
+      if (ticker['01. symbol'] == undefined || ticker['01. symbol'] == null) {
+        var elem = _ejs.default.render(noResultView); //insert view
 
-      if (data['01. symbol'] == undefined || data['01. symbol'] == null) {
-        var elem = _ejs.default.render(noResultView, data);
 
         _this.container.insertAdjacentHTML("afterbegin", elem);
       } else {
-        var _elem = _ejs.default.render(foundResultView, data);
+        //must remember to add curly brace for object
+        var _elem = _ejs.default.render(foundResultView, {
+          ticker: ticker
+        }); //insert view
+
 
         _this.container.insertAdjacentHTML("afterbegin", _elem);
       }
@@ -2811,11 +2809,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //create new "classes" from these default functions
 var model = new _alphavantage.default();
 var searchView = new _searchView.default();
-var controller = new _searchController.default(model, searchView);
+var controller = new _searchController.default(model, searchView); //call configUI to retrieve search value and pass into the view
+
 controller.configUI();
-console.log(model);
-console.log(searchView);
-console.log(controller);
 },{"./controllers/search-controller.js":"js/controllers/search-controller.js","./models/alphavantage.js":"js/models/alphavantage.js","./views/search-view.js":"js/views/search-view.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

@@ -8,8 +8,6 @@ import SearchView from './views/search-view.js';
 const model = new AlphaVantageModel();
 const searchView = new SearchView();
 const controller = new SearchController(model, searchView);
-controller.configUI();
 
-console.log(model)
-console.log(searchView)
-console.log(controller)
+//call configUI to retrieve search value and pass into the view
+controller.configUI();

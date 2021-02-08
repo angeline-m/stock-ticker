@@ -1,7 +1,8 @@
 body {
     text-align: center;
     font-family: 'Calibri', 'Arial', sans-serif;
-    background-color: #b4b4b4;
+    background-color: #ececec;
+    list-style: none;
 }
 
 header {
@@ -9,6 +10,80 @@ header {
     color: #fff;
     font-size: 2rem;
     padding: 20px 0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form div {
+    margin-top: 10px;
+}
+
+button {
+    background-color: #ee5353;
+    color: #fff;
+    border: 1px solid #ee5353;
+}
+
+.noResults {
+    font-size: 2rem;
+    font-size: bold;
+    margin-top: 20px;
+}
+
+.symbolInfo {
+    margin-top: 20px;
+}
+
+.symbolInfo h2 {
+    margin-bottom: 10px;
+}
+
+.symbol {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.price {
+    font-style: italic;
+    font-size: 1.75rem;
+    color: #797979;
+}
+
+.lineTwo{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #df8014;
+    margin-bottom: 5px;
+}
+
+.lineThree {
+    font-size: 1.2rem;
+}
+
+.close {
+    font-weight: bold;
+    color: #3073df;
+}
+
+.change {
+    font-weight: bold;
+    color:  #df8014;
+}
+
+.change-per {
+    font-style: italic;
+    font-weight: bold;
+    color: #797979;
 }
 
 
