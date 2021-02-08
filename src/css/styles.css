@@ -27,10 +27,15 @@ form div {
     margin-top: 10px;
 }
 
+input {
+    height: 20px;
+}
+
 button {
     background-color: #ee5353;
     color: #fff;
     border: 1px solid #ee5353;
+    padding: 4px 10px;
 }
 
 .noResults {
@@ -85,4 +90,3 @@ button {
     font-weight: bold;
     color: #797979;
 }
-
