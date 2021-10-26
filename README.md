@@ -1,5 +1,4 @@
-# dmit-2008-assign-1
-Assignment 1 for DMIT 2008 - Stock Ticker App
+# Stock Ticker App
 - This is an assignment that requires the usage of an external API to load stock information into a simple search page that returns the query results (if a valid symbol is given).
 - This assignment uses the MVC model to handle the capturing of the search data, retrieving the queried data's results, and showing the results on the page.
 
