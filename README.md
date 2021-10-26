@@ -1,6 +1,7 @@
 # Stock Ticker App
-- This is an assignment that requires the usage of an external API to load stock information into a simple search page that returns the query results (if a valid symbol is given).
-- This assignment uses the MVC model to handle the capturing of the search data, retrieving the queried data's results, and showing the results on the page.
+- This is a project that requires the usage of an external API to load stock information into a simple search page that returns the query results (if a valid symbol is given).
+- This application  uses the MVC model to handle the capturing of the search data, retrieving the queried data's results, and showing the results on the page.
+- The application receives a stock symbol and returns the following data: price, previous close price, price change, and latest trading day.
 
 ## Model
 The model file is responsible for putting together the appropriate query URL with the correct parameters. It already receives the function and key values, and simply needs the form input value given by the user. The model retrieves the information for the given symbol and returns the object result for that symbol.
