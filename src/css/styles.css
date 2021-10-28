@@ -182,7 +182,7 @@ aside {
 .sectionTwo {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     color: white;
     text-transform: uppercase;
 }
@@ -289,6 +289,7 @@ aside {
 
     .sectionTwo {
         flex-direction: column;
+        flex-wrap: wrap;
     }
 
     .topInfo {
