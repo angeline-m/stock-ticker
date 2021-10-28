@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://web.simmons.edu/~grovesd/comm244/notes/week4/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
     <title>Stock Ticker</title>
 </head>
+
 <body>
     <header>
-        <h1>Stock Ticker App</h1>
+        <h1>Stock Ticker</h1>
+        <p>Enter a stock symbol to receive up-to-date information</p>
     </header>
     <main>
         <div class="container">
             <form id="searchForm" class="searchForm">
-                <label for="symbolSearch">Enter your search query</label>
-                <div>
-                    <input type="text" id="symbolSearch" name="symbolSearch" required>
-                    <button class="submit">Search</button>
+                <label for="symbolSearch" class="sr-only">Enter your search query</label>
+                <div class="formItems">
+                    <input type="text" id="symbolSearch" name="symbolSearch" placeholder="ex. AMZN" required>
+                    <button class="submit"><i class="fas fa-search"></i><span class="sr-only">Search</span></button>
                 </div>
             </form>
             <div id="results" class="results">
-                
             </div>
         </div>
     </main>
-    
+
     <script src="js/index.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/3993fa0209.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

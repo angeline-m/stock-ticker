@@ -1,10 +1,128 @@
+/* General Styles */
+
 body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
-    font-family: 'Calibri', 'Arial', sans-serif;
-    background-color: #ececec;
-    list-style: none;
+    color: white;
+    background-image: linear-gradient(180deg, #45b8ee, #186fac);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+
+header {
+    margin: 6rem 0;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 7rem;
+    text-transform: uppercase;
+    /*text-shadow: 5px 3px 1px rgba(57,87,116,0.5);*/
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+header p {
+    font-size: 1.5rem;
+}
+
+/* Main Styles */
+
+/* Form */
+
+.formItems {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+input,
+button {
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+}
+
+input {
+    width: 600px;
+    font-size: 1.1rem;
+    padding: 10px;
+    -webkit-box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.15); 
+    box-shadow: 5px 5px 5px -2px rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+}
+
+input:focus {
+    outline: none;
+}
+
+::placeholder,
+:-ms-input-placeholder,
+::-ms-input-placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+, IE 10-11, Edge */
+    color: #cecece;
+    letter-spacing: 1px;
+    /* Firefox */
+    opacity: 1;
+}
+
+
+button {
+    background-color: #344c63;
+    min-width: 70px;
+    font-size: 1.75rem;
+    color: #cecece;
+    margin-left: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #395774;
+}
+
+/* Screen Reader Styles */
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Media Queries */
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {
+    header {
+        margin: 1rem 0;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    header p {
+        font-size: 1.1rem;
+    }
+    
+    .formItems {
+        padding: 0 20px;
+    }
+}
+
+/* 
 header {
     background-color: #2f2f2f;
     color: #fff;
@@ -14,10 +132,6 @@ header {
     text-transform: uppercase;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 form {
     margin-top: 20px;
@@ -89,4 +203,4 @@ button {
     font-style: italic;
     font-weight: bold;
     color: #797979;
-}
+} */
