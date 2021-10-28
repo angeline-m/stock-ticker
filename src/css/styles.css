@@ -300,6 +300,10 @@ aside {
         flex-wrap: wrap;
     }
 
+    .symbol {
+        margin-right: 20px;
+    }
+
     .sectionTwo div:nth-child(2),
     .sectionTwo div:nth-child(3) {
         margin-left: 0;
