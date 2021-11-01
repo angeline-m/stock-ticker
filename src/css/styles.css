@@ -85,18 +85,18 @@ input:focus {
 }
 
 button {
-    background-color: #344c63;
     min-width: 70px;
     font-size: 1.75rem;
-    color: #cecece;
     margin-left: 10px;
     transition: 0.3s;
+    color: white;
+    background-color: #395774;
 }
 
 button:hover {
     cursor: pointer;
-    color: white;
-    background-color: #395774;
+    background-color: #344c63;
+    color: #cecece;
 }
 
 /* Screen Reader Styles */
